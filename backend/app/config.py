@@ -19,5 +19,10 @@ class Settings(BaseSettings):
     # SQLite file in the backend folder. Later: postgresql+psycopg://user:pass@host/gyst
     database_url: str = f"sqlite:///{BACKEND_DIR / 'gyst.db'}"
 
+    # Websites allowed to call this API from a browser (CORS). The frontend runs
+    # on a different port, so the browser asks first. Set as a JSON list, e.g.
+    # CORS_ORIGINS='["http://localhost:3000","https://gyst.example"]'
+    cors_origins: list[str] = ["http://localhost:3000"]
+
 
 settings = Settings()

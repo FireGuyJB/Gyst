@@ -27,6 +27,4 @@ class Goal(Base):
     title: Mapped[str] = mapped_column(String(200))
     # server_default: the *database* fills this in on INSERT, so every row gets a
     # timestamp even if it's inserted outside our Python code.
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
