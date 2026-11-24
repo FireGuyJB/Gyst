@@ -36,7 +36,7 @@ reference it (e.g. "implements R2.1"). Status: `planned` → `in progress` → `
 |---|---|---|
 | N1 | Local development uses SQLite; production will use PostgreSQL with no code rewrites (see [ADR 0003](../decisions/0003-sqlite-first.md)). | done |
 | N2 | Every PR passes automated lint, test, and build checks. | done |
-| N3 | **Phone-first** layout (designed at 402 px wide), and it still works on larger screens. | planned |
+| N3 | **Website, laptop-first:** designed for laptop/desktop screens first. Pages must not break on phones; a polished phone layout comes later (see [ADR 0004](../decisions/0004-web-app-laptop-first.md)). | planned |
 | N4 | Light and dark themes. | planned |
 
 ## Open questions
@@ -45,5 +45,4 @@ reference it (e.g. "implements R2.1"). Status: `planned` → `in progress` → `
 - **Multiple goals:** can a user have more than one primary goal at a time?
 - **Recurrence rules:** how flexible (daily/weekly only, or "every 3 days")?
 - **Partially filled charts:** can a user start using the checklist before all 64 tasks are filled? (Likely yes.)
-- **Web app or native app?** The designs are iPhone screens. Is the goal a phone-friendly *web* app (what Next.js builds, installable to the home screen), or eventually a native iOS app?
 - **Checklist & calendar screens** aren't designed yet (the bottom button on `StandardMid9Light` may lead to them).

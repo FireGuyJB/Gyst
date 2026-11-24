@@ -39,7 +39,7 @@ path.
 |---|---|
 | **Database** | New `Goal` model in `backend/app/models.py`: `id` (int, PK), `title` (`String(200)`, not null), `created_at` (timestamp, set by the server). One Alembic migration: `add goals table`. |
 | **API** | `backend/app/schemas.py`: `GoalCreate` (`title`: trimmed, 1–200 chars) and `GoalRead` (`id`, `title`, `created_at`). `backend/app/routers/goals.py`: `GET /goals` (list, newest first) and `POST /goals` (create; returns `201` and the `GoalRead`). Add CORS to `main.py`, allowing origins from a new `cors_origins` setting (default `["http://localhost:3000"]`). |
-| **Frontend** | `NEXT_PUBLIC_API_URL` (default `http://localhost:8000`) in `frontend/.env.example`. `src/lib/api.ts`: typed `listGoals()` and `createGoal(title)`. The home page becomes a client component with a goal form and a list, plus loading, error and empty states. **Layout loosely follows Figma `CreationHome`** ([designs.md](../../product/designs.md)): a phone-width column, the GYST header, "+ add primary goal", and goals shown as yellow rounded tiles. Pixel-perfect styling, dark mode and the 3×3 grids are out of scope. |
+| **Frontend** | `NEXT_PUBLIC_API_URL` (default `http://localhost:8000`) in `frontend/.env.example`. `src/lib/api.ts`: typed `listGoals()` and `createGoal(title)`. The home page becomes a client component with a goal form and a list, plus loading, error and empty states. **Layout loosely follows Figma `CreationHome`** ([designs.md](../../product/designs.md)), adapted for a **laptop screen** ([ADR 0004](../../decisions/0004-web-app-laptop-first.md)): the GYST header, "+ add primary goal", and goals shown as yellow rounded tiles. Pixel-perfect styling, dark mode and the 3×3 grids are out of scope. |
 
 ### One request, end to end (the thing to learn)
 
@@ -58,7 +58,7 @@ path.
 
 ## Decisions to record
 
-- **ADR 0004: the browser calls the API directly (client-side fetch).** We
+- **ADR 0005: the browser calls the API directly (client-side fetch).** We
   don't route through Next.js server components or route handlers. That way
   every request is visible in DevTools, and there's one obvious path, which
   serves the learning goal. Revisit when auth arrives.
@@ -81,7 +81,7 @@ path.
 - `docs/guides/getting-started.md`: run both apps together;
   `frontend/.env.example`; a "trace a request" exercise using DevTools and
   `/docs`.
-- `docs/decisions/0004-client-side-api-calls.md`, plus the ADR index.
+- `docs/decisions/0005-client-side-api-calls.md`, plus the ADR index.
 - `docs/features/README.md`: feature index row; this spec's status → `Done`.
 
 ## Out of scope

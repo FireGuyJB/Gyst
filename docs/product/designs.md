@@ -8,7 +8,7 @@ current version.
 
 ## What the designs tell us
 
-- **Phone-first.** Every screen is an iPhone frame (402 × 874).
+- **Phone frames are placeholders.** The screens are iPhone-sized, but Gyst is built **laptop-first** ([ADR 0004](../decisions/0004-web-app-laptop-first.md)). Take the content, flow and style from these screens and adapt the layout to a wide screen.
 - **Light and dark themes.** Each creation screen has a light and a dark
   version.
 - **Two modes:**
@@ -16,7 +16,7 @@ current version.
   - **Standard:** using it day to day.
 - **The chart is a 3 × 3 grid you drill into, not one big 9 × 9 grid.** The
   center tile is the goal one level up, and the 8 tiles around it are its
-  children. A 9 × 9 grid would be too small on a phone.
+  children. This keeps each screen focused and still works when we add phone layouts later.
 - **Color identity.** The primary goal is yellow, and each supporting goal has
   its own color: rose, mint, blue, peach, taupe, indigo, pink and sage.
 - **Tiles:** large rounded squares. An empty slot shows a white **+**.

@@ -17,3 +17,4 @@ ADR that *supersedes* the old one.
 | [0001](0001-monorepo.md) | One repo for frontend, backend, and docs | Accepted |
 | [0002](0002-fastapi-backend.md) | FastAPI for the Python API | Accepted |
 | [0003](0003-sqlite-first.md) | SQLite now, PostgreSQL later, via SQLAlchemy + Alembic | Accepted |
+| [0004](0004-web-app-laptop-first.md) | A website, designed for laptops first and phones second | Accepted |
