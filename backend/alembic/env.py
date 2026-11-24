@@ -22,7 +22,8 @@ from app import models  # noqa: E402,F401  (imports all models so they register 
 from app.config import settings  # noqa: E402
 from app.db import Base  # noqa: E402
 
-config.set_main_option("sqlalchemy.url", settings.database_url)
+# "%" is special in Alembic's config file format, so escape it (URL-encoded passwords use it).
+config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -47,6 +48,7 @@ def run_migrations_offline() -> None:
     context.configure(
         url=url,
         target_metadata=target_metadata,
+        render_as_batch=True,  # SQLite can't ALTER columns; rebuild tables instead
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
     )
@@ -69,7 +71,11 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            render_as_batch=True,  # SQLite can't ALTER columns; rebuild tables instead
+        )
 
         with context.begin_transaction():
             context.run_migrations()

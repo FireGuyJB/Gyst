@@ -10,7 +10,7 @@
 
 Files:
 
-- `backend/app/config.py`: `DATABASE_URL` (default `sqlite:///./gyst.db`)
+- `backend/app/config.py`: `DATABASE_URL` (default: `backend/gyst.db`, the same file whichever folder you run from)
 - `backend/app/db.py`: `engine`, `SessionLocal`, `Base`, `get_db()`
 - `backend/app/models.py`: table classes (empty for now)
 - `backend/alembic/versions/`: migration files (none yet)

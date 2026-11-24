@@ -38,15 +38,22 @@ Open <http://localhost:8000/docs> for FastAPI's interactive API docs.
 
 ## 4. Run the frontend (in a second terminal)
 
+Open a new terminal tab; it starts in your home folder, so go to the repo first:
+
 ```bash
-cd frontend
+cd path/to/Gyst/frontend
 npm install
 npm run dev
 ```
 
 Open <http://localhost:3000>. You should see the Gyst home page.
 
+> Your editor may show a red squiggle on `LayoutProps` until you've run
+> `npm run dev` or `npm run build` once. Next.js generates that type; it's harmless.
+
 ## 5. Run the checks (the same ones CI runs)
+
+From the `Gyst` folder:
 
 ```bash
 # backend
@@ -54,9 +61,10 @@ cd backend
 uv run ruff check .          # lint: common mistakes
 uv run ruff format --check . # formatting (run `uv run ruff format .` to fix)
 uv run pytest                # tests
+uv run alembic upgrade head  # migrations apply cleanly
 
 # frontend
-cd frontend
+cd ../frontend
 npm run lint
 npm run build
 ```

@@ -12,7 +12,7 @@
 
 ## Checklist
 
-- [ ] Backend checks pass (`uv run ruff check . && uv run ruff format --check . && uv run pytest`)
+- [ ] Backend checks pass (`uv run ruff check . && uv run ruff format --check . && uv run pytest && uv run alembic upgrade head`)
 - [ ] Frontend checks pass (`npm run lint && npm run build`)
 - [ ] Docs updated (requirements status, architecture, feature spec, ADR if needed)
 - [ ] Migrations included for any model changes
