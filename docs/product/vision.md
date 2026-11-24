@@ -37,4 +37,4 @@ accountability, not just a to-do list.
 
 ## Design
 
-Initial designs live in Figma. *(Link TBD: add it here once shared.)*
+Initial designs live in [Figma](https://www.figma.com/design/GLscEIaKNkrVg3gGQQKtgu/Gyst). See [designs.md](designs.md) for what they show and how they shape the product.
