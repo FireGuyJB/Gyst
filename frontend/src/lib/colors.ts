@@ -18,3 +18,15 @@ export const SLOT_COLORS = [
   "bg-pink-300", // 6 pink
   "bg-lime-200", // 7 sage
 ];
+
+/** Lighter versions of SLOT_COLORS, for the tasks under each supporting goal. */
+export const SLOT_SOFT_COLORS = [
+  "bg-rose-100",
+  "bg-teal-50",
+  "bg-sky-100",
+  "bg-orange-50",
+  "bg-stone-100",
+  "bg-indigo-100",
+  "bg-pink-100",
+  "bg-lime-50",
+];
