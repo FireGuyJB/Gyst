@@ -1,6 +1,6 @@
 # 002. Supporting goals: the 3×3 grid
 
-- **Status:** Draft (awaiting approval)
+- **Status:** In progress
 - **Requirements:** R1.2, R1.4 (first level), R1.5 (for supporting goals), R1.6
 - **Branch / PR:** `feature/002-supporting-goals` / #? (branched from 001 while PR #2 is open)
 
@@ -80,7 +80,7 @@ Positions run clockwise from the top-left. The center is the primary goal:
 └───────┴───────┴───────┘
 ```
 
-Exact shades come from Figma (`CreationMid9Light`) when building. If users
+Shades are Tailwind colors close to the Figma names for now; matching the exact Figma values is a styling pass for later. If users
 can pick colors later, that becomes a new column then.
 
 ### One request, end to end
