@@ -1,8 +1,8 @@
 # 002. Supporting goals: the 3×3 grid
 
-- **Status:** In progress
+- **Status:** Done
 - **Requirements:** R1.2, R1.4 (first level), R1.5 (for supporting goals), R1.6
-- **Branch / PR:** `feature/002-supporting-goals` / #? (branched from 001 while PR #2 is open)
+- **Branch / PR:** `feature/002-supporting-goals` / PR #3 (branched from 001 while PR #2 is open)
 
 ## Problem
 
@@ -23,23 +23,23 @@ happen. Feature 003 hangs tasks off these, so they come first.
 
 ## Acceptance criteria
 
-- [ ] Clicking a goal tile on the home page opens `/goals/{id}`.
-- [ ] That page shows a 3×3 grid: the yellow primary goal in the center and 8
+- [x] Clicking a goal tile on the home page opens `/goals/{id}`.
+- [x] That page shows a 3×3 grid: the yellow primary goal in the center and 8
       slots around it, each in its slot's color. Empty slots show a white **+**.
-- [ ] Clicking a slot turns it into a text box. Enter (or clicking away) saves;
+- [x] Clicking a slot turns it into a text box. Enter (or clicking away) saves;
       Escape cancels. A saved slot shows its title.
-- [ ] Clicking a filled slot edits its title. Saving a blank title is rejected
+- [x] Clicking a filled slot edits its title. Saving a blank title is rejected
       with a readable message. A separate "clear" control on the tile empties
       the slot (with a confirm step).
-- [ ] The API stores at most 8 supporting goals per primary goal, one per
+- [x] The API stores at most 8 supporting goals per primary goal, one per
       position 0–7. Positions outside 0–7 are rejected (`422`).
-- [ ] Titles are trimmed and limited to 1–200 characters, like primary goals.
-- [ ] An unknown goal id returns `404`, and the page shows "Goal not found"
+- [x] Titles are trimmed and limited to 1–200 characters, like primary goals.
+- [x] An unknown goal id returns `404`, and the page shows "Goal not found"
       with a link home.
-- [ ] Everything survives a refresh and a restart.
-- [ ] Backend tests cover: get a goal with its supporting goals, set a slot,
+- [x] Everything survives a refresh and a restart.
+- [x] Backend tests cover: get a goal with its supporting goals, set a slot,
       overwrite a slot, clear a slot, bad position, blank title, unknown goal.
-- [ ] CI is green and the docs are updated.
+- [x] CI is green and the docs are updated.
 
 ## How the layers connect
 

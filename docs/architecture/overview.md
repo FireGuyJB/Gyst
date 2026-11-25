@@ -68,9 +68,13 @@ Every feature follows this same path, built **bottom-up**: model + migration
 ## Current state
 
 - The three layers are **connected** (feature [001](../features/001-walking-skeleton/spec.md)).
-- API routes: `GET /health`, `GET /goals` (newest first), `POST /goals`.
-- One table: `goals` (see [database.md](database.md)).
-- The home page lists and creates primary goals (title only). Supporting
-  goals and tasks come in feature 002.
+- API routes: `GET /health`, `GET /goals` (newest first), `POST /goals`,
+  `GET /goals/{id}`, and `PUT`/`DELETE /goals/{id}/supporting-goals/{position}`.
+- Tables: `goals`, `supporting_goals` (see [database.md](database.md)).
+- The home page lists and creates primary goals. Clicking one opens
+  `/goals/{id}`: a 3×3 grid with the goal in the center and its 8
+  supporting-goal slots around it (feature [002](../features/002-supporting-goals/spec.md)).
+- Shared UI pieces live in `frontend/src/components/` (`Grid`, `SlotTile`).
+  Tasks come in feature 003.
 
 See also: [database.md](database.md).

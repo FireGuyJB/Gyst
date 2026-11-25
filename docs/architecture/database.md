@@ -20,6 +20,7 @@ Files:
 | Table | Model | Columns | Added in |
 |---|---|---|---|
 | `goals` | `Goal` | `id` (PK), `title` (up to 200 chars), `created_at` (set by the database) | [001](../features/001-walking-skeleton/spec.md) |
+| `supporting_goals` | `SupportingGoal` | `id`, `goal_id` (→ `goals`), `position` (0–7, its slot in the grid), `title`, `created_at`. Unique on (`goal_id`, `position`), so each slot holds one. Deleted with its goal. | [002](../features/002-supporting-goals/spec.md) |
 
 ## Adding or changing a table (the workflow)
 
