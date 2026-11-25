@@ -43,3 +43,26 @@ class GoalRead(BaseModel):
         read it as local time. (Postgres already includes the timezone.)
         """
         return value.replace(tzinfo=UTC) if value.tzinfo is None else value
+
+
+class SupportingGoalSet(BaseModel):
+    """The JSON body for PUT /goals/{goal_id}/supporting-goals/{position}."""
+
+    title: GoalTitle = Field(examples=["Build endurance"])
+
+
+class SupportingGoalRead(BaseModel):
+    """A supporting goal as the API returns it."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    goal_id: int
+    position: int  # 0-7, clockwise from the top-left of the grid
+    title: str
+
+
+class GoalDetail(GoalRead):
+    """One goal plus its supporting goals (only filled slots, in position order)."""
+
+    supporting_goals: list[SupportingGoalRead]
