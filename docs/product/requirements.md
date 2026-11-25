@@ -7,10 +7,11 @@ reference it (e.g. "implements R2.1"). Status: `planned` → `in progress` → `
 
 | ID | Requirement | Status |
 |---|---|---|
-| R1.1 | A user can create a **primary goal** with a title (and optional description). | planned |
+| R1.1 | A user can create a **primary goal** with a title (and optional description). | in progress (title only, [001](../features/001-walking-skeleton/spec.md)) |
 | R1.2 | Each primary goal has exactly **8 supporting goals** (slots), which the user fills in. | planned |
 | R1.3 | Each supporting goal has exactly **8 tasks** (slots), for 64 per primary goal. | planned |
-| R1.4 | The user can view the whole chart at once (the 9×9 grid view). | planned |
+| R1.4 | The user navigates the chart as nested **3×3 grids**: primary goal → its 8 supporting goals → a supporting goal's 8 tasks (see [designs.md](designs.md)). | planned |
+| R1.6 | Each supporting goal has its own color, used on its tile and its tasks. The primary goal is yellow. | planned |
 | R1.5 | The user can edit or clear any goal or task. | planned |
 
 ## R2. Checklist
@@ -35,6 +36,8 @@ reference it (e.g. "implements R2.1"). Status: `planned` → `in progress` → `
 |---|---|---|
 | N1 | Local development uses SQLite; production will use PostgreSQL with no code rewrites (see [ADR 0003](../decisions/0003-sqlite-first.md)). | done |
 | N2 | Every PR passes automated lint, test, and build checks. | done |
+| N3 | **Website, laptop-first:** designed for laptop/desktop screens first. Pages must not break on phones; a polished phone layout comes later (see [ADR 0004](../decisions/0004-web-app-laptop-first.md)). | planned |
+| N4 | Light and dark themes. | planned |
 
 ## Open questions
 
@@ -42,4 +45,4 @@ reference it (e.g. "implements R2.1"). Status: `planned` → `in progress` → `
 - **Multiple goals:** can a user have more than one primary goal at a time?
 - **Recurrence rules:** how flexible (daily/weekly only, or "every 3 days")?
 - **Partially filled charts:** can a user start using the checklist before all 64 tasks are filled? (Likely yes.)
-- **Designs:** Figma link to be added; screens will refine R1.4, R2, R3.
+- **Checklist & calendar screens** aren't designed yet (the bottom button on `StandardMid9Light` may lead to them).

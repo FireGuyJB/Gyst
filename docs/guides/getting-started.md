@@ -46,12 +46,37 @@ npm install
 npm run dev
 ```
 
-Open <http://localhost:3000>. You should see the Gyst home page.
+Open <http://localhost:3000>. You should see the Gyst home page. **Keep the
+backend from step 3 running too:** the page loads its goals from the API, and
+shows "Can't reach the Gyst API" if the backend isn't up.
+
+The frontend finds the API through `NEXT_PUBLIC_API_URL` (default
+`http://localhost:8000`). You only need to set it if the API runs somewhere
+else: copy `frontend/.env.example` to `frontend/.env.local`, edit it, and
+restart `npm run dev`.
 
 > Your editor may show a red squiggle on `LayoutProps` until you've run
 > `npm run dev` or `npm run build` once. Next.js generates that type; it's harmless.
 
-## 5. Run the checks (the same ones CI runs)
+## 5. Trace a request (try it once)
+
+With both apps running:
+
+1. Open <http://localhost:3000>, then open DevTools (`Cmd+Option+I`) → **Network**.
+2. Add a goal, e.g. "Run a marathon", and click **Save**.
+3. Click the `goals` request in the list. You may see two: an `OPTIONS` one
+   (the browser's CORS check) and the `POST`. Look at the **Payload** (what the
+   frontend sent) and **Response** (what the API sent back, with an `id`).
+4. Now call the API without the frontend: open <http://localhost:8000/docs>,
+   expand `POST /goals`, click **Try it out**, and send `{"title": "   "}`.
+   You get `422`: the API's validation rejects it, whichever client calls it.
+5. Refresh the home page. Both goals are still there, because they're saved in
+   `backend/gyst.db`.
+
+Each step is explained, with file names, in
+[architecture/overview.md](../architecture/overview.md#life-of-a-request-a-real-one-saving-a-goal).
+
+## 6. Run the checks (the same ones CI runs)
 
 From the `Gyst` folder:
 

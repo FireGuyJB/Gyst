@@ -4,12 +4,13 @@
 - `SessionLocal`: makes a "session", one unit of work (a few reads and writes).
 - `Base`: every table (model) we define will inherit from this.
 - `get_db`: a FastAPI dependency that hands each request its own session.
-
-No tables exist yet; the first models arrive with the first feature.
+- `DbSession`: the type to put on a route parameter to receive that session.
 """
 
 from collections.abc import Iterator
+from typing import Annotated
 
+from fastapi import Depends
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
@@ -45,3 +46,8 @@ def get_db() -> Iterator[Session]:
         yield db
     finally:
         db.close()
+
+
+# Use in a route as `def my_route(db: DbSession)`. FastAPI sees the Depends(...)
+# and calls get_db() for each request, passing the session in as `db`.
+DbSession = Annotated[Session, Depends(get_db)]
