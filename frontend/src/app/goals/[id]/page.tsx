@@ -125,6 +125,8 @@ function GoalGrid() {
         title={slot?.title}
         onSave={(title) => save(position, title)}
         onClear={() => clear(position)}
+        // A filled supporting goal opens its own grid of tasks.
+        href={slot && `/supporting-goals/${slot.id}`}
       />
     );
   });
@@ -141,7 +143,7 @@ function GoalGrid() {
     <PageShell>
       <h2 className="text-xl font-semibold">+ add supporting goals</h2>
       <p className="-mt-6 text-zinc-500">
-        The 8 pillars that make &ldquo;{goal.title}&rdquo; happen. Fill them in any order.
+        The 8 pillars that make &ldquo;{goal.title}&rdquo; happen. Fill them in any order, then click one to add its tasks.
       </p>
       {saveError && (
         <p role="alert" className="text-sm text-red-600">

@@ -111,3 +111,56 @@ export function setSupportingGoal(
 export function clearSupportingGoal(goalId: number, position: number): Promise<void> {
   return request<void>(`/goals/${goalId}/supporting-goals/${position}`, { method: "DELETE" });
 }
+
+/** How often a task happens (matches Frequency in backend/app/schemas.py). */
+export type Frequency = "daily" | "days" | "weekly" | "per_day";
+
+/** What you send to save a task (matches TaskSet). Weekdays: Monday = 0. */
+export type TaskInput = {
+  title: string;
+  description: string;
+  duration_minutes: number;
+  frequency: Frequency;
+  weekdays: number[]; // only for "days"
+  times_per_week: number | null; // only for "weekly"
+  times_per_day: number | null; // only for "per_day"
+};
+
+/** A task as the API returns it (matches TaskRead). */
+export type Task = TaskInput & {
+  id: number;
+  supporting_goal_id: number;
+  position: number;
+  /** The weekdays it lands on this week. For "weekly" tasks Gyst picks them. */
+  scheduled_days: number[];
+};
+
+/** A supporting goal with its tasks (matches SupportingGoalDetail). */
+export type SupportingGoalDetail = {
+  id: number;
+  goal_id: number;
+  goal_title: string;
+  position: number;
+  title: string;
+  tasks: Task[];
+};
+
+/** GET /supporting-goals/{id}: one supporting goal with its tasks. */
+export function getSupportingGoal(id: string | number): Promise<SupportingGoalDetail> {
+  return request<SupportingGoalDetail>(`/supporting-goals/${id}`);
+}
+
+/** PUT /supporting-goals/{id}/tasks/{position}: fill a task slot or replace it. */
+export function setTask(supportingGoalId: number, position: number, task: TaskInput): Promise<Task> {
+  return request<Task>(`/supporting-goals/${supportingGoalId}/tasks/${position}`, {
+    method: "PUT",
+    body: JSON.stringify(task),
+  });
+}
+
+/** DELETE /supporting-goals/{id}/tasks/{position}: empty a task slot. */
+export function clearTask(supportingGoalId: number, position: number): Promise<void> {
+  return request<void>(`/supporting-goals/${supportingGoalId}/tasks/${position}`, {
+    method: "DELETE",
+  });
+}
