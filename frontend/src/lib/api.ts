@@ -16,6 +16,17 @@ export type Goal = {
   created_at: string; // ISO 8601 timestamp in UTC, e.g. "2026-11-24T22:09:40Z"
 };
 
+/** A supporting goal in one of the 8 slots (matches SupportingGoalRead). */
+export type SupportingGoal = {
+  id: number;
+  goal_id: number;
+  position: number; // 0-7, clockwise from the top-left of the grid
+  title: string;
+};
+
+/** A goal with its supporting goals (matches GoalDetail). Empty slots are missing. */
+export type GoalDetail = Goal & { supporting_goals: SupportingGoal[] };
+
 /** The API couldn't be reached at all: it's not running, or the network is down. */
 export class ApiUnreachableError extends Error {
   constructor() {
@@ -50,7 +61,20 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   if (!response.ok) {
     throw new ApiError(response.status, `The API returned ${response.status}`);
   }
+  // 204 No Content (e.g. after a DELETE) has no body to parse.
+  if (response.status === 204) return undefined as T;
   return response.json() as Promise<T>;
+}
+
+/** Turn any error from this file into a sentence for the user. */
+export function describeError(error: unknown, invalidInput: string): string {
+  if (error instanceof ApiUnreachableError) {
+    return "Can't reach the Gyst API. Is the backend running?";
+  }
+  if (error instanceof ApiError && error.status === 422) {
+    return invalidInput;
+  }
+  return "Something went wrong. Please try again.";
 }
 
 /** GET /goals: all goals, newest first. */
@@ -64,4 +88,26 @@ export function createGoal(title: string): Promise<Goal> {
     method: "POST",
     body: JSON.stringify({ title }),
   });
+}
+
+/** GET /goals/{id}: one goal with its supporting goals. */
+export function getGoal(id: string | number): Promise<GoalDetail> {
+  return request<GoalDetail>(`/goals/${id}`);
+}
+
+/** PUT /goals/{id}/supporting-goals/{position}: fill a slot or rename it. */
+export function setSupportingGoal(
+  goalId: number,
+  position: number,
+  title: string,
+): Promise<SupportingGoal> {
+  return request<SupportingGoal>(`/goals/${goalId}/supporting-goals/${position}`, {
+    method: "PUT",
+    body: JSON.stringify({ title }),
+  });
+}
+
+/** DELETE /goals/{id}/supporting-goals/{position}: empty a slot. */
+export function clearSupportingGoal(goalId: number, position: number): Promise<void> {
+  return request<void>(`/goals/${goalId}/supporting-goals/${position}`, { method: "DELETE" });
 }

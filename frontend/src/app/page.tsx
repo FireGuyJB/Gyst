@@ -7,18 +7,13 @@
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
 
-import { ApiError, ApiUnreachableError, createGoal, type Goal, listGoals } from "@/lib/api";
+import Link from "next/link";
 
-// Turn any error from src/lib/api.ts into a sentence for the user.
-function describeError(error: unknown): string {
-  if (error instanceof ApiUnreachableError) {
-    return "Can't reach the Gyst API. Is the backend running?";
-  }
-  if (error instanceof ApiError && error.status === 422) {
-    return "Your goal needs a title (1–200 characters).";
-  }
-  return "Something went wrong. Please try again.";
-}
+import { createGoal, describeError, type Goal, listGoals } from "@/lib/api";
+import { PRIMARY_COLOR } from "@/lib/colors";
+
+const describe = (error: unknown) =>
+  describeError(error, "Your goal needs a title (1–200 characters).");
 
 export default function Home() {
   const [goals, setGoals] = useState<Goal[]>([]);
@@ -44,7 +39,7 @@ export default function Home() {
         setLoadError(null);
       })
       .catch((error) => {
-        if (!ignore) setLoadError(describeError(error));
+        if (!ignore) setLoadError(describe(error));
       })
       .finally(() => {
         if (!ignore) setLoading(false);
@@ -63,7 +58,7 @@ export default function Home() {
       setGoals((current) => [goal, ...current]); // newest first, no reload needed
       setTitle("");
     } catch (error) {
-      setSaveError(describeError(error));
+      setSaveError(describe(error));
     } finally {
       setSaving(false);
     }
@@ -125,18 +120,21 @@ export default function Home() {
           <button
             onClick={() => inputRef.current?.focus()}
             aria-label="Add your first primary goal"
-            className="flex aspect-square w-56 items-center justify-center rounded-3xl bg-yellow-300 text-8xl font-light text-white hover:bg-yellow-400"
+            className={`flex aspect-square w-56 items-center justify-center rounded-3xl ${PRIMARY_COLOR} text-8xl font-light text-white hover:brightness-95`}
           >
             +
           </button>
         ) : (
           <ul className="grid grid-cols-4 gap-6">
             {goals.map((goal) => (
-              <li
-                key={goal.id}
-                className="flex aspect-square items-center justify-center rounded-3xl bg-yellow-300 p-5 text-center text-lg font-semibold break-words text-zinc-900"
-              >
-                {goal.title}
+              <li key={goal.id}>
+                {/* Each goal opens its 3x3 grid of supporting goals. */}
+                <Link
+                  href={`/goals/${goal.id}`}
+                  className={`flex aspect-square items-center justify-center rounded-3xl ${PRIMARY_COLOR} p-5 text-center text-lg font-semibold break-words text-zinc-900 hover:brightness-95`}
+                >
+                  {goal.title}
+                </Link>
               </li>
             ))}
           </ul>

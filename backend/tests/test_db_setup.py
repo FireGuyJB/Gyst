@@ -13,7 +13,8 @@ def test_constraints_get_predictable_names():
     convention = Base.metadata.naming_convention
     assert convention["pk"] == "pk_%(table_name)s"
     assert convention["fk"] == "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s"
-    assert convention["uq"] == "uq_%(table_name)s_%(column_0_name)s"
+    # column_0_N_name joins every column, e.g. uq_supporting_goals_goal_id_position
+    assert convention["uq"] == "uq_%(table_name)s_%(column_0_N_name)s"
 
 
 def test_alembic_uses_batch_mode_for_sqlite():

@@ -30,3 +30,6 @@ __pycache__/
 # --- Claude Code / tooling scratch ---
 .superpowers/
 .claude/settings.local.json
+
+# Playwright browser-testing scratch files
+.playwright-mcp/
