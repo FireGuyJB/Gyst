@@ -21,6 +21,7 @@ Files:
 |---|---|---|---|
 | `goals` | `Goal` | `id` (PK), `title` (up to 200 chars), `created_at` (set by the database) | [001](../features/001-walking-skeleton/spec.md) |
 | `supporting_goals` | `SupportingGoal` | `id`, `goal_id` (→ `goals`), `position` (0–7, its slot in the grid), `title`, `created_at`. Unique on (`goal_id`, `position`), so each slot holds one. Deleted with its goal. | [002](../features/002-supporting-goals/spec.md) |
+| `tasks` | `Task` | `id`, `supporting_goal_id` (→ `supporting_goals`), `position` (0–7), `title`, `description`, `duration_minutes`, `frequency` (`daily`/`days`/`weekly`/`per_day`), `weekdays` (JSON list, Monday = 0), `times_per_week`, `times_per_day`, `created_at`. Unique on (`supporting_goal_id`, `position`). Deleted with its supporting goal. Weekly days aren't stored ([ADR 0006](../decisions/0006-weekly-tasks-scheduled-live.md)). | [003](../features/003-tasks/spec.md) |
 
 ## Adding or changing a table (the workflow)
 

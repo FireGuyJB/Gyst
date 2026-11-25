@@ -69,12 +69,19 @@ Every feature follows this same path, built **bottom-up**: model + migration
 
 - The three layers are **connected** (feature [001](../features/001-walking-skeleton/spec.md)).
 - API routes: `GET /health`, `GET /goals` (newest first), `POST /goals`,
-  `GET /goals/{id}`, and `PUT`/`DELETE /goals/{id}/supporting-goals/{position}`.
-- Tables: `goals`, `supporting_goals` (see [database.md](database.md)).
+  `GET /goals/{id}`, `PUT`/`DELETE /goals/{id}/supporting-goals/{position}`,
+  `GET /supporting-goals/{id}`, and `PUT`/`DELETE /supporting-goals/{id}/tasks/{position}`.
+- Tables: `goals`, `supporting_goals`, `tasks` (see [database.md](database.md)).
+- `backend/app/scheduling.py` works out which days each task lands on this
+  week, putting "× per week" tasks on the lightest days. It runs on every
+  read, so the days rebalance ([ADR 0006](../decisions/0006-weekly-tasks-scheduled-live.md)).
 - The home page lists and creates primary goals. Clicking one opens
   `/goals/{id}`: a 3×3 grid with the goal in the center and its 8
   supporting-goal slots around it (feature [002](../features/002-supporting-goals/spec.md)).
-- Shared UI pieces live in `frontend/src/components/` (`Grid`, `SlotTile`).
-  Tasks come in feature 003.
+- Clicking a supporting goal opens `/supporting-goals/{id}`: the same grid
+  one level down, with a side panel (`TaskPanel`) for each task's time, how
+  often and notes (feature [003](../features/003-tasks/spec.md)).
+- Shared UI pieces live in `frontend/src/components/` (`Grid`, `SlotTile`,
+  `TaskPanel`). Next up: the daily checklist (R2).
 
 See also: [database.md](database.md).

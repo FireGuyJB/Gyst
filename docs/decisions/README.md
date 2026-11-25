@@ -19,3 +19,4 @@ ADR that *supersedes* the old one.
 | [0003](0003-sqlite-first.md) | SQLite now, PostgreSQL later, via SQLAlchemy + Alembic | Accepted |
 | [0004](0004-web-app-laptop-first.md) | A website, designed for laptops first and phones second | Accepted |
 | [0005](0005-client-side-api-calls.md) | The browser calls the API directly (client-side fetch) | Accepted |
+| [0006](0006-weekly-tasks-scheduled-live.md) | Weekly tasks are scheduled live, not stored | Accepted |

@@ -9,17 +9,17 @@ reference it (e.g. "implements R2.1"). Status: `planned` → `in progress` → `
 |---|---|---|
 | R1.1 | A user can create a **primary goal** with a title (and optional description). | in progress (title only, [001](../features/001-walking-skeleton/spec.md)) |
 | R1.2 | Each primary goal has exactly **8 supporting goals** (slots), which the user fills in. | done ([002](../features/002-supporting-goals/spec.md); partly filled grids allowed) |
-| R1.3 | Each supporting goal has exactly **8 tasks** (slots), for 64 per primary goal. | planned |
-| R1.4 | The user navigates the chart as nested **3×3 grids**: primary goal → its 8 supporting goals → a supporting goal's 8 tasks (see [designs.md](designs.md)). | in progress (goal level done in 002) |
-| R1.6 | Each supporting goal has its own color, used on its tile and its tasks. The primary goal is yellow. | in progress (supporting goal tiles done in 002) |
-| R1.5 | The user can edit or clear any goal or task. | in progress (supporting goals done in 002) |
+| R1.3 | Each supporting goal has exactly **8 tasks** (slots), for 64 per primary goal. | done ([003](../features/003-tasks/spec.md); partly filled allowed) |
+| R1.4 | The user navigates the chart as nested **3×3 grids**: primary goal → its 8 supporting goals → a supporting goal's 8 tasks (see [designs.md](designs.md)). | done (002, 003) |
+| R1.6 | Each supporting goal has its own color, used on its tile and its tasks. The primary goal is yellow. | done (002, 003; exact Figma shades still to match) |
+| R1.5 | The user can edit or clear any goal or task. | in progress (supporting goals and tasks done; the primary goal can't be edited yet) |
 
 ## R2. Checklist
 
 | ID | Requirement | Status |
 |---|---|---|
 | R2.1 | Tasks appear in a checklist the user can mark done or not done. | planned |
-| R2.2 | Tasks can be one-off or **recurring** (e.g. daily, specific weekdays) to build routines. | planned |
+| R2.2 | Tasks can be one-off or **recurring** (e.g. daily, specific weekdays) to build routines. | in progress (routines in 003: every day, specific days, × per week auto-placed, × per day; one-off tasks come with the checklist) |
 | R2.3 | The checklist shows progress per supporting goal and for the primary goal. | planned |
 
 ## R3. Calendar

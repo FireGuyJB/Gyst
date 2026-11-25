@@ -1,8 +1,8 @@
 # 003. Tasks: creation and scheduling
 
-- **Status:** Draft (approved 2026-11-25)
+- **Status:** Done
 - **Requirements:** R1.3, R1.5 (for tasks), R2.2 (routines), R3.1 (in part)
-- **Branch / PR:** `feature/003-tasks` / #?
+- **Branch / PR:** `feature/003-tasks` / PR #4 (stacked on 002)
 
 ## Problem
 
