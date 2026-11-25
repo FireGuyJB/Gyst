@@ -7,7 +7,7 @@ reference it (e.g. "implements R2.1"). Status: `planned` → `in progress` → `
 
 | ID | Requirement | Status |
 |---|---|---|
-| R1.1 | A user can create a **primary goal** with a title (and optional description). | planned |
+| R1.1 | A user can create a **primary goal** with a title (and optional description). | in progress (title only, [001](../features/001-walking-skeleton/spec.md)) |
 | R1.2 | Each primary goal has exactly **8 supporting goals** (slots), which the user fills in. | planned |
 | R1.3 | Each supporting goal has exactly **8 tasks** (slots), for 64 per primary goal. | planned |
 | R1.4 | The user navigates the chart as nested **3×3 grids**: primary goal → its 8 supporting goals → a supporting goal's 8 tasks (see [designs.md](designs.md)). | planned |

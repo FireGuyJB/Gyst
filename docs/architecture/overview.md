@@ -16,7 +16,7 @@ flowchart LR
 
     subgraph A[API: backend/app/]
       direction TB
-      A1[FastAPI route<br/>main.py] --> A2[SQLAlchemy session<br/>db.py]
+      A1[FastAPI route<br/>routers/] --> A2[SQLAlchemy session<br/>db.py]
     end
 
     A2 -->|SQL| D[(Database<br/>SQLite now,<br/>Postgres later)]
@@ -37,30 +37,40 @@ flowchart LR
 - **Each layer can change on its own.** Swapping SQLite for Postgres touches
   only the data layer; redesigning a page touches only the frontend.
 
-## Life of a request (what a future feature will look like)
+## Life of a request (a real one: saving a goal)
 
-Example: the user checks off a task on the "today" page.
+You type "Run a marathon" on the home page and click **Save**. You can watch
+steps 2–6 in the browser's DevTools → Network tab.
 
-1. **Browser → Frontend.** The user clicks a checkbox. A React component
-   (`frontend/src/...`) handles the click.
-2. **Frontend → API.** The component sends an HTTP request, e.g.
-   `PATCH http://localhost:8000/tasks/42` with JSON `{"done": true}`.
-3. **API route.** FastAPI matches the URL to a Python function (a *route*),
-   validates the JSON against a schema, and asks for a DB session via
-   `Depends(get_db)`.
-4. **API → Database.** The route loads `Task` 42 through SQLAlchemy, sets
-   `done = True`, and commits. SQLAlchemy writes the SQL (`UPDATE tasks ...`).
-5. **Back up the chain.** The API returns the updated task as JSON; the
-   React component updates what's on screen.
+1. **Browser → Frontend.** `frontend/src/app/page.tsx` handles the form
+   submit and calls `createGoal()`.
+2. **Frontend → API.** `createGoal()` in `frontend/src/lib/api.ts` sends
+   `POST http://localhost:8000/goals` with JSON `{"title": "Run a marathon"}`.
+   The browser calls the API directly ([ADR 0005](../decisions/0005-client-side-api-calls.md)).
+3. **CORS check.** Because the frontend (port 3000) and API (port 8000) are
+   different origins, the browser first asks the API whether it allows this.
+   `CORSMiddleware` in `backend/app/main.py` says yes for the origins in the
+   `cors_origins` setting.
+4. **API route.** FastAPI matches the URL to `create_goal()` in
+   `backend/app/routers/goals.py` and validates the JSON against `GoalCreate`
+   in `backend/app/schemas.py`. A blank or too-long title stops here with
+   `422`, before our code runs.
+5. **API → Database.** `create_goal()` gets a session via `DbSession`
+   (`Depends(get_db)` in `backend/app/db.py`), adds a `Goal`
+   (`backend/app/models.py`) and commits. SQLAlchemy writes the SQL
+   (`INSERT INTO goals ...`).
+6. **Back up the chain.** The API returns `201` with the goal as JSON (shaped
+   by `GoalRead`). React adds it to the list on screen.
 
 Every feature follows this same path, built **bottom-up**: model + migration
 → API route + tests → UI. See [features/README.md](../features/README.md).
 
 ## Current state
 
-- Frontend and API both run, but **are not connected yet**. Connecting them
-  (CORS, an API base URL, a first fetch) is the first step of PR #2.
-- The API has one route: `GET /health`.
-- The data layer is configured but has **no tables**.
+- The three layers are **connected** (feature [001](../features/001-walking-skeleton/spec.md)).
+- API routes: `GET /health`, `GET /goals` (newest first), `POST /goals`.
+- One table: `goals` (see [database.md](database.md)).
+- The home page lists and creates primary goals (title only). Supporting
+  goals and tasks come in feature 002.
 
 See also: [database.md](database.md).

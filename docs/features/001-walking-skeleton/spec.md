@@ -1,6 +1,6 @@
 # 001. Walking skeleton: connect frontend → API → database
 
-- **Status:** Draft (ready to plan)
+- **Status:** Done
 - **Requirements:** R1.1 (partially: a primary goal with a title only)
 - **Branch / PR:** `feature/001-walking-skeleton` / PR #2
 
@@ -20,18 +20,18 @@ path.
 
 ## Acceptance criteria
 
-- [ ] With both apps running, the home page lists saved goals, newest first.
-- [ ] Submitting the form saves a goal, and it appears in the list without a
+- [x] With both apps running, the home page lists saved goals, newest first.
+- [x] Submitting the form saves a goal, and it appears in the list without a
       full page reload.
-- [ ] A blank title (or only spaces) is rejected. The API returns `422` and the
+- [x] A blank title (or only spaces) is rejected. The API returns `422` and the
       page shows a readable message.
-- [ ] Titles are trimmed and limited to 1–200 characters.
-- [ ] If the API isn't running, the page shows "Can't reach the Gyst API"
+- [x] Titles are trimmed and limited to 1–200 characters.
+- [x] If the API isn't running, the page shows "Can't reach the Gyst API"
       instead of crashing.
-- [ ] Goals survive restarting both apps (they're stored in `backend/gyst.db`).
-- [ ] Backend tests cover listing, creating and validation, and run against a
+- [x] Goals survive restarting both apps (they're stored in `backend/gyst.db`).
+- [x] Backend tests cover listing, creating and validation, and run against a
       separate temporary database, never `gyst.db`.
-- [ ] CI is green, and the docs are updated (see "Docs to update").
+- [x] CI is green, and the docs are updated (see "Docs to update").
 
 ## How the layers connect
 

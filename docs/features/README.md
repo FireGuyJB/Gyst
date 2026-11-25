@@ -53,4 +53,4 @@ connect"**. CI must pass before merging.
 
 | # | Feature | Status |
 |---|---|---|
-| [001](001-walking-skeleton/spec.md) | Walking skeleton: connect frontend → API → database (primary goal title only) | Draft |
+| [001](001-walking-skeleton/spec.md) | Walking skeleton: connect frontend → API → database (primary goal title only) | Done |

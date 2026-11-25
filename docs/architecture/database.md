@@ -12,8 +12,14 @@ Files:
 
 - `backend/app/config.py`: `DATABASE_URL` (default: `backend/gyst.db`, the same file whichever folder you run from)
 - `backend/app/db.py`: `engine`, `SessionLocal`, `Base`, `get_db()`
-- `backend/app/models.py`: table classes (empty for now)
-- `backend/alembic/versions/`: migration files (none yet)
+- `backend/app/models.py`: table classes, one per table
+- `backend/alembic/versions/`: migration files, one per schema change
+
+## Tables
+
+| Table | Model | Columns | Added in |
+|---|---|---|---|
+| `goals` | `Goal` | `id` (PK), `title` (up to 200 chars), `created_at` (set by the database) | [001](../features/001-walking-skeleton/spec.md) |
 
 ## Adding or changing a table (the workflow)
 
