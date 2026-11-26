@@ -23,7 +23,19 @@ CLAUDE.md   Rules for anyone (human or AI) working in this repo
 ## Quick start
 
 See **[docs/guides/getting-started.md](docs/guides/getting-started.md)** for
-full setup. The short version:
+full setup. The short version, from the repo root:
+
+```bash
+make setup    # install packages + update the local database (first time, or after pulling)
+make dev      # run the API (:8000) and frontend (:3000) together; Ctrl+C stops both
+make health   # check the API is up
+make check    # run the same checks CI runs
+```
+
+In VS Code, the same commands are tasks: `Cmd+Shift+P` → **Tasks: Run Task**
+→ pick a **Gyst:** task, or press `Cmd+Shift+B` to run the app.
+
+Or run each app by hand:
 
 ```bash
 # Backend: http://localhost:8000/docs
