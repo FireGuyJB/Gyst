@@ -1,0 +1,58 @@
+{
+  // VS Code "buttons" for running Gyst. Open the Command Palette (Cmd+Shift+P)
+  // → "Tasks: Run Task", or press Cmd+Shift+B to run "Gyst: Run app".
+  // Each task calls a target in the root Makefile.
+  // "options.statusbar" adds status-bar buttons if you have the
+  // "Tasks" extension (actboy168.tasks); without it, VS Code ignores them.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Gyst: Setup",
+      "options": { "statusbar": { "label": "$(tools) Setup", "tooltip": "make setup: install packages + migrate DB" } },
+      "type": "shell",
+      "command": "make setup",
+      "problemMatcher": []
+    },
+    {
+      "label": "Gyst: Backend",
+      "options": { "statusbar": { "hide": true } },
+      "type": "shell",
+      "command": "make backend",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "gyst-dev", "panel": "dedicated" }
+    },
+    {
+      "label": "Gyst: Frontend",
+      "options": { "statusbar": { "hide": true } },
+      "type": "shell",
+      "command": "make frontend",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "gyst-dev", "panel": "dedicated" }
+    },
+    {
+      // Starts both side by side in split terminals. Stop them with the trash icon.
+      "label": "Gyst: Run app",
+      "options": { "statusbar": { "label": "$(play) Run app", "tooltip": "Start API (:8000) + frontend (:3000)" } },
+      "dependsOn": ["Gyst: Backend", "Gyst: Frontend"],
+      "problemMatcher": [],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "Gyst: Health check",
+      "options": { "statusbar": { "label": "$(pulse) Health", "tooltip": "GET http://localhost:8000/health" } },
+      "type": "shell",
+      "command": "make health",
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Gyst: Run checks (like CI)",
+      "options": { "statusbar": { "label": "$(checklist) Checks", "tooltip": "make check: lint, format, tests, build" } },
+      "type": "shell",
+      "command": "make check",
+      "problemMatcher": []
+    }
+  ]
+}

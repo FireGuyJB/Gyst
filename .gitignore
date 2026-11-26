@@ -1,6 +1,7 @@
 # --- OS / editor ---
 .DS_Store
-.vscode/
+.vscode/*
+!.vscode/tasks.json
 .idea/
 
 # --- Secrets & local config (never commit these) ---

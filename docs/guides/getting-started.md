@@ -24,6 +24,27 @@ git clone https://github.com/FireGuyJB/Gyst.git
 cd Gyst
 ```
 
+## Shortcut: `make` and VS Code tasks
+
+Steps 3–4 and 6 below are wrapped in the root [`Makefile`](../../Makefile), so
+once you understand them you can run them from the `Gyst` folder:
+
+| Command | Does |
+|---|---|
+| `make setup` | `uv sync` + `alembic upgrade head` + `npm install` |
+| `make dev` | Runs the backend and frontend together in one terminal; `Ctrl+C` stops both |
+| `make health` | Calls <http://localhost:8000/health> and prints the result |
+| `make check` | The step 6 checks (what CI runs) |
+
+In VS Code these are buttons too, defined in
+[`.vscode/tasks.json`](../../.vscode/tasks.json): `Cmd+Shift+P` → **Tasks: Run
+Task** → **Gyst: …**. `Cmd+Shift+B` runs **Gyst: Run app**, which opens the
+backend and frontend in split terminals. Close them with the trash-can icon.
+
+Optional: install the **Tasks** extension (`actboy168.tasks`) and these show up
+as buttons in VS Code's bottom status bar: **▶ Run app**, **Health**,
+**Setup**, **Checks**.
+
 ## 3. Run the backend (API)
 
 ```bash
